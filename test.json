@@ -1,0 +1,88 @@
+{
+  "city": [
+    {
+      "name": "Москва",
+      "coordinates": [
+        55,
+        37
+      ],
+      "area": 2511000000,
+      "population": 12500000,
+      "metersAboveSeaLevel": 156,
+      "carCode": 77,
+      "Climate": 3,
+      "StandardOfLiving": 1,
+      "Governor": [
+        [
+          1958,
+          7,
+          21
+        ],
+        "Сергей Собянин"
+      ]
+    },
+    {
+      "name": "Санкт-Петербург",
+      "coordinates": [
+        59,
+        30
+      ],
+      "area": 1439000000,
+      "population": 5300000,
+      "metersAboveSeaLevel": 10,
+      "carCode": 78,
+      "Climate": 4,
+      "StandardOfLiving": 1,
+      "Governor": [
+        [
+          1957,
+          5,
+          19
+        ],
+        "Александр Беглов"
+      ]
+    },
+    {
+      "name": "Нижний Тагил",
+      "coordinates": [
+        58,
+        58
+      ],
+      "area": 220000000,
+      "population": 351000,
+      "metersAboveSeaLevel": 190,
+      "carCode": 66,
+      "Climate": 3,
+      "StandardOfLiving": 2,
+      "Governor": [
+        [
+          1986,
+          2,
+          11
+        ],
+        "Владислав Пинаев"
+      ]
+    },
+    {
+      "name": "Горно-Алтайск",
+      "coordinates": [
+        52,
+        86
+      ],
+      "area": 117000000,
+      "population": 61500,
+      "metersAboveSeaLevel": 700,
+      "carCode": 4,
+      "Climate": 4,
+      "StandardOfLiving": 3,
+      "Governor": [
+        [
+          1976,
+          8,
+          3
+        ],
+        "Ольга Сафронова"
+      ]
+    }
+  ]
+}
