@@ -1,6 +1,9 @@
 package server;
 
+import my_programm.CustomFileReader;
 import my_programm.Manager;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -25,13 +28,12 @@ public class Server {
 
     }
 
-    public void start() throws IOException {
+    public void start() throws IOException, NullPointerException {
         System.out.println("Сервер запущен");
         manager = new Manager();
         File f = new File("localsave.json");
         if (f.exists() && !f.isDirectory()) {
             manager.setFile("localsave.json", false);
-            System.out.println("У вас существует локальное сохранение, вы желаете его загрузить? [Y/n]");
         }
 
         try {
@@ -60,14 +62,46 @@ public class Server {
                                 String ret = "";
                                 if (commands != null && commands.size() > 0) {
 //                                System.out.println("Получены сообщения:");
+                                    boolean jsonsend = false;
                                     for (String com : commands) {
                                         System.out.println(client + " --> " + com);
                                         for (String s : manager.commandHandler(com)) {
-                                            ret += s + "\n";
+                                            if (s.strip().equals("отправить json")) {
+                                                jsonsend = true;
+                                            } else {
+                                                ret += s + "\n";
+                                            }
                                         }
                                     }
                                     out.write(ret);
                                     out.flush();
+                                    if (jsonsend) {
+//                                        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(client.getOutputStream());
+                                        String jsonString = "";
+                                        try {
+                                            List<String> arr = CustomFileReader.readFile("sendData.json");
+                                            if (arr == null) {
+                                                throw new NullPointerException();
+                                            }
+                                            for (String s : arr) {
+                                                jsonString += s + "\n";
+                                            }
+                                            Object obj = new JSONParser().parse(jsonString);
+                                            JSONObject jo = (JSONObject) obj;
+//                                            out.write("Готов отпралять json\n");
+//                                            out.flush();
+                                            out.write(jo.toString() + "\n");
+                                            out.flush();
+//                                            outputStreamWriter.write(obj.toString() + "\n");
+//                                            outputStreamWriter.flush();
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        } finally {
+//                                            outputStreamWriter.close();
+//                                            out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
+//                                            System.out.println("!2344");
+                                        }
+                                    }
 //                                run = false;
 //                                break;
                                 }
@@ -142,6 +176,7 @@ public class Server {
         try {
             ArrayList<String> commands = new ArrayList();
             for (Iterator<String> it = in.lines().iterator(); it.hasNext(); ) {
+                System.out.println("!!!!!!!!!!!!!!");
                 String s = it.next();
                 if (s.equals("end")) {break;}
                 commands.add(s);
@@ -149,7 +184,7 @@ public class Server {
 //            System.out.println(commands);
             return commands;
         } catch (Exception e) {
-//            e.printStackTrace();
+            e.printStackTrace();
 //            System.out.println("Выключаемся без лишних вопросов и поломок");
         }
         return null;

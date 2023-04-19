@@ -1,12 +1,8 @@
 package client;
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
 
 public class Client2 {
 
@@ -24,13 +20,18 @@ public class Client2 {
             reader = new BufferedReader(new InputStreamReader(System.in));
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+            InputStreamReader inputStreamReader = new InputStreamReader(clientSocket.getInputStream());
 
             boolean run = true;
             while (run) {
                 CompletableFuture<String> waitMessageFromServer = CompletableFuture.supplyAsync(() -> wait_new_message(in));
 
+                Date c_date = new Date();
                 while (!waitMessageFromServer.isDone()) {
                     do {
+                        if (new Date().getTime() - c_date.getTime() > 300) {
+                            waitMessageFromServer.cancel(true);
+                        }
                         try {
                             if (reader.ready()) {
                                 commands.add(reader.readLine());
@@ -41,11 +42,14 @@ public class Client2 {
                     } while (!waitMessageFromServer.isDone());
                 }
 
+                if (waitMessageFromServer.isCancelled()) {
+                    continue;
+                }
+
                 String mes = waitMessageFromServer.get();
 
                 if (mes != null) {
-//                    System.out.println("Получил письмо ---> " + waitMessageFromServer.get());
-                    if (mes.equals("Готов принимать данные")) {
+                    if (mes.strip().equals("Готов принимать данные")) {
                         String s = "";
                         for (String l : commands) {
                             s += l + "\n";

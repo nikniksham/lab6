@@ -106,22 +106,23 @@ public class Manager {
         arr.add("Таблица: ключ - Integer, хранимые данные - City\nДата инициализации: " + dateIni.toString() + "\nКоличество элементов: " + table.size());
     }
 
-    public void show() {
+    public void show() throws IOException {
+        this.save("sendData.json");
         if (table.size() == 0) {
             arr.add("Таблица пуста");
         }
-
-        ArrayList<City> arr_val = new ArrayList<>();
-        ArrayList<Integer> arr_key = new ArrayList<>();
-        for (Map.Entry<Integer,City> entry : table.entrySet()) {
-            arr_val.add(entry.getValue());
-            arr_key.add(entry.getKey());
-        }
-
-        for (int i = arr_val.size() - 1; i > -1; --i) {
-            arr.add(arr_key.get(i) + " " + arr_val.get(i));
-            arr.add("-------------------------------------");
-        }
+        arr.add("отправить json");
+//        ArrayList<City> arr_val = new ArrayList<>();
+//        ArrayList<Integer> arr_key = new ArrayList<>();
+//        for (Map.Entry<Integer,City> entry : table.entrySet()) {
+//            arr_val.add(entry.getValue());
+//            arr_key.add(entry.getKey());
+//        }
+//
+//        for (int i = arr_val.size() - 1; i > -1; --i) {
+//            arr.add(arr_key.get(i) + " " + arr_val.get(i));
+//            arr.add("-------------------------------------");
+//        }
     }
 
     public void clear() {
