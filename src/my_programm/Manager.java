@@ -51,7 +51,7 @@ public class Manager {
         } else if (input.contains("remove_key ")) {
             this.remove_key(input.split("\s")[1]);
         } else if (input.equals("exit")) {
-            System.exit(0);
+//            System.exit(0);
         } else if (input.equals("print_unique_climate")) {
             this.print_unique_climate();
         } else if (input.contains("update ")) {
@@ -141,7 +141,9 @@ public class Manager {
         } else {
             loc_id = id;
             table.put(loc_id++, this.create_city_by_string(element));
-            this.id = loc_id;
+            if (loc_id > this.id) {
+                this.id = loc_id;
+            }
             loc_id = null;
             arr.add("Новый город добавлен " + id);
             change_something = true;

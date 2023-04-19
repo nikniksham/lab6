@@ -95,7 +95,7 @@ public class Server {
 //                                            outputStreamWriter.write(obj.toString() + "\n");
 //                                            outputStreamWriter.flush();
                                         } catch (Exception e) {
-                                            e.printStackTrace();
+//                                            e.printStackTrace();
                                         } finally {
 //                                            outputStreamWriter.close();
 //                                            out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
@@ -126,7 +126,7 @@ public class Server {
                     }
                 } catch (Exception e) {
                     Socket gay = null;
-                    e.printStackTrace();
+//                    e.printStackTrace();
                     for (Socket client : clients.keySet()) {
                         try {
                             Map<BufferedReader, BufferedWriter> buff = clients.get(client);
@@ -153,7 +153,7 @@ public class Server {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         } finally {
             if (manager.isChange_something()) {
                 manager.save("localsave.json");
@@ -176,7 +176,7 @@ public class Server {
         try {
             ArrayList<String> commands = new ArrayList();
             for (Iterator<String> it = in.lines().iterator(); it.hasNext(); ) {
-                System.out.println("!!!!!!!!!!!!!!");
+//                System.out.println("!!!!!!!!!!!!!!");
                 String s = it.next();
                 if (s.equals("end")) {break;}
                 commands.add(s);
@@ -184,7 +184,7 @@ public class Server {
 //            System.out.println(commands);
             return commands;
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
 //            System.out.println("Выключаемся без лишних вопросов и поломок");
         }
         return null;
