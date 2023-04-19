@@ -59,7 +59,8 @@ public class Client2 {
                                 if (l.strip().equals("exit")) {
                                     System.exit(0);
                                 } else if (l.strip().contains("execute_script ")) { // execute_script smert.txt
-                                    s += get_command(l, new ArrayList<String>());
+                                    s += get_command(l, new ArrayList<>());
+//                                    System.out.println(s);
                                 } else if (!l.strip().equals("save")) {
                                     s += l + "\n";
                                 }

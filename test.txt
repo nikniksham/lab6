@@ -1,2 +1,4 @@
-info
-execute_script test1.txt
+insert 5 {"lafs", [10, 10], 124214, 2142, 22, 41}
+insert 6 {"lafs", [10, 10], 124214, 2142, 22, 41}
+insert 7 {"lafs", [10, 10], 124214, 2142, 22, 41}
+insert 8 {"lafs", [10, 10], 124214, 2142, 22, 41}

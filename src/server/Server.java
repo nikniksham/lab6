@@ -51,7 +51,7 @@ public class Server {
                             out.write("Готов принимать данные\n");
                             out.flush();
                             while (!waitMessage.isDone()) {
-                                if (new Date().getTime() - c_date.getTime() > 100) {
+                                if (new Date().getTime() - c_date.getTime() > 1000) {
                                     waitMessage.cancel(true);
                                 }
                             }
@@ -131,7 +131,7 @@ public class Server {
                         try {
                             Map<BufferedReader, BufferedWriter> buff = clients.get(client);
                             BufferedWriter out = buff.values().iterator().next();
-                            out.write("проверка на гея");
+                            out.write("проверка на гея\n");
                             out.flush();
                         } catch (Exception e2) {
                             gay = client;
